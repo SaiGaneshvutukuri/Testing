@@ -1,0 +1,44 @@
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+import time
+import random
+
+class ExploratoryTestAutomation:
+    def __init__(self):
+        self.driver = webdriver.Chrome()  # You can use other drivers based on your application
+
+    def explore_application(self):
+        try:
+            # Navigate to the application
+            self.driver.get("https://example.com")
+
+            # Simulate dynamic exploration
+            self.random_explore()
+
+            # Additional scenarios can be added here
+
+        except Exception as e:
+            print(f"Error: {e}")
+        finally:
+            self.driver.quit()
+
+    def random_explore(self):
+        # Simulate random clicks, inputs, and navigation
+        for _ in range(5):  # Perform 5 random actions
+            random_element = random.choice(self.driver.find_elements_by_css_selector('a, input, button'))
+            
+            if random_element.tag_name == 'a':
+                # Click on a random link
+                random_element.click()
+            elif random_element.tag_name == 'input':
+                # Input random text into a text field
+                random_element.send_keys("RandomText")
+            elif random_element.tag_name == 'button':
+                # Click a random button
+                random_element.click()
+
+            time.sleep(2)  # Add a delay for visualization, adjust based on application response time
+
+if __name__ == "__main__":
+    test_automation = ExploratoryTestAutomation()
+    test_automation.explore_application()
